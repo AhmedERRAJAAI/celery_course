@@ -1,0 +1,16 @@
+version: '27.1.1' //docker version
+
+services:
+  
+  django:
+    container_name: django // docker name
+    build:
+      context: ./celery_course // where the Dockerfile is located
+      dockerfile: Dockerfile // specify the Dockerfile name if it is changed
+
+    command: python manage.py runserver 0.0.0.0:8000 //cmd to run django app o port 8000
+    volumes:
+      - ./celery_course:usr/src/app/  //docker copies the local code to the image and store it in this path
+
+    ports:
+      - 8001:8000 // match the 8001 port where docker is running with 8000 where the app server is running
